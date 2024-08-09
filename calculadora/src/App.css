@@ -34,3 +34,39 @@
   transition: background-color 0.2s;
   display: center;
 }
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.number-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.operation-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.botoes {
+  font-size: 1.5rem;
+  padding: 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #ff9f43;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: center;
+}

@@ -1,47 +1,70 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Display from "../components/Display";
 import Botoes from "../components/Botoes";
 
 function Calculadora() {
-    const [primeiroNumero, setPrimeiroNumero] = useState(0);
-    const [segundoNumero, setSegundoNumero] = useState(0);
+    const [currentInput, setCurrentInput] = useState("");
+    const [operation, setOperation] = useState(null);
+    const [previousInput, setPreviousInput] = useState("");
     const [resultado, setResultado] = useState(0);
 
-    //4 operacoes matemátcas
-    const somar = () => {
-        setResultado(primeiroNumero + segundoNumero);
-    }
+    const handleNumberClick = (number) => {
+        setCurrentInput(currentInput + number);
+    };
 
-    const subtrair = () => {
-        setResultado(primeiroNumero - segundoNumero);
-    }
-    
-    const multiplicar = () => {
-        setResultado(primeiroNumero * segundoNumero);
-    }
-    
-    const dividir = () => {
-        setResultado(primeiroNumero / segundoNumero);
-    }
+    const handleOperationClick = (op) => {
+        if (currentInput === "") return;
+        setOperation(op);
+        setPreviousInput(currentInput);
+        setCurrentInput("");
+    };
 
-    return(
+    const handleEqualsClick = () => {
+        if (currentInput === "" || previousInput === "") return;
+        const num1 = parseFloat(previousInput);
+        const num2 = parseFloat(currentInput);
+        let res = 0;
+        switch (operation) {
+            case "+":
+                res = num1 + num2;
+                break;
+            case "-":
+                res = num1 - num2;
+                break;
+            case "*":
+                res = num1 * num2;
+                break;
+            case "/":
+                res = num1 / num2;
+                break;
+            default:
+                return;
+        }
+        setResultado(res);
+        setCurrentInput(res.toString());
+        setPreviousInput("");
+        setOperation(null);
+    };
+
+    const handleClearClick = () => {
+        setCurrentInput("");
+        setPreviousInput("");
+        setOperation(null);
+        setResultado(0);
+    };
+
+    return (
         <div className="calculadora">
             <h1>Calculadora</h1>
-            <Display resultado={resultado} />
-            <input type="number" value={primeiroNumero} onChange={e => setPrimeiroNumero(Number(e.target.value))} />
-            <input type="number" value={segundoNumero} onChange={e => setSegundoNumero(Number(e.target.value))} />
-            <br />
-            <Botoes 
-                multiplicar={multiplicar} 
-                dividir={dividir} 
-                somar={somar} 
-                subtrair={subtrair} 
-                primeiroNumero={setPrimeiroNumero} 
-                segundoNumero={setSegundoNumero} 
+            <Display resultado={currentInput || resultado} />
+            <Botoes
+                handleNumberClick={handleNumberClick}
+                handleOperationClick={handleOperationClick}
+                handleEqualsClick={handleEqualsClick}
+                handleClearClick={handleClearClick}
             />
         </div>
-    )
-
+    );
 }
 
 export default Calculadora;
