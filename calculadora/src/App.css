@@ -1,0 +1,36 @@
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #282c34;
+}
+
+.calculadora {
+  background-color: #3e4a61;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.display {
+  background-color: #282c34;
+  color: white;
+  font-size: 2rem;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: right;
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.botoes {
+  font-size: 1.5rem;
+  padding: 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #ff9f43;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: center;
+}
